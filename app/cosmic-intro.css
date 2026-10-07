@@ -1,0 +1,391 @@
+/* Home-only living-cosmos entry. Motion architecture follows the user's layered character intro. */
+
+.home-intro-dialog {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100svh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #f7f3ea;
+  color-scheme: dark;
+  background: #010207;
+  border: 0;
+}
+
+.home-intro-dialog::backdrop { background: #010207; }
+.cosmic-entry-active > .skip-link { opacity: 0; pointer-events: none; transform: translateY(-150%); }
+body.cosmic-entry-active .cosmic-observation-light,
+body.cosmic-entry-active .cosmic-star-layer { animation-play-state: paused !important; }
+
+.home-intro-dialog .cosmic-dream-stage,
+.home-intro-dialog .cosmic-dream-panorama,
+.home-intro-dialog .cosmic-dream-canvas,
+.home-intro-dialog .cosmic-dream-atmosphere,
+.home-intro-dialog .cosmic-dream-grain,
+.home-intro-dialog .cosmic-dream-vignette,
+.home-intro-dialog .home-intro-blackout {
+  position: absolute;
+  inset: 0;
+}
+
+.home-intro-dialog .cosmic-dream-stage {
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 68% 22%, rgba(91, 145, 153, .13), transparent 42%),
+    radial-gradient(ellipse at 91% 72%, rgba(170, 92, 57, .08), transparent 38%),
+    linear-gradient(132deg, #01030a 0%, #06101d 51%, #02050c 100%);
+}
+
+.home-intro-dialog .cosmic-dream-panorama {
+  z-index: 0;
+  inset: -5.5%;
+  display: block;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(1.025);
+}
+
+.home-intro-dialog .cosmic-dream-panorama img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: saturate(.9) contrast(1.04) brightness(.78);
+  transform: scale(1.05) translate3d(calc(-1.25% + var(--cosmos-pointer-x, 0px)), calc(.85% + var(--cosmos-pointer-y, 0px)), 0) rotate(-.18deg);
+  transform-origin: 69% 25%;
+  user-select: none;
+  backface-visibility: hidden;
+  will-change: filter, transform;
+}
+
+.home-intro-dialog--open .cosmic-dream-panorama {
+  animation: yeoun-panorama-arrive 1.48s cubic-bezier(.16, .74, .18, 1) both;
+}
+
+.home-intro-dialog--open .cosmic-dream-panorama img {
+  animation: yeoun-panorama-voyage 10.5s 1.05s cubic-bezier(.44, .08, .56, .92) infinite alternate;
+}
+
+.home-intro-dialog .cosmic-dream-canvas {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.025);
+}
+
+.home-intro-dialog--open .cosmic-dream-canvas {
+  animation: yeoun-cosmos-arrive 1.4s cubic-bezier(.16, .74, .18, 1) both;
+}
+
+.home-intro-dialog .cosmic-dream-atmosphere {
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(1, 3, 10, .65) 0%, rgba(1, 3, 10, .4) 28%, rgba(1, 3, 10, .07) 56%, rgba(1, 3, 10, .025) 100%),
+    linear-gradient(180deg, rgba(1, 3, 10, .22), transparent 31%, transparent 58%, rgba(1, 3, 10, .66));
+}
+
+.home-intro-dialog .cosmic-dream-atmosphere::before,
+.home-intro-dialog .cosmic-dream-atmosphere::after {
+  position: absolute;
+  inset: -8%;
+  content: "";
+}
+
+.home-intro-dialog .cosmic-dream-atmosphere::before {
+  opacity: .7;
+  background:
+    radial-gradient(ellipse at 70% 24%, rgba(232, 199, 126, .09), transparent 31%),
+    linear-gradient(151deg, transparent 29%, rgba(117, 199, 196, .025) 48%, transparent 67%);
+  mix-blend-mode: screen;
+}
+
+.home-intro-dialog--open .cosmic-dream-atmosphere::before {
+  animation: yeoun-cosmos-breathe 7.8s 1.05s ease-in-out infinite alternate;
+}
+
+.home-intro-dialog .cosmic-dream-atmosphere::after {
+  opacity: .72;
+  background: linear-gradient(108deg, rgba(1, 3, 10, .52) 4%, transparent 43%, transparent 78%, rgba(1, 3, 10, .12));
+}
+
+.home-intro-dialog--open .cosmic-dream-atmosphere::after {
+  animation: yeoun-cosmic-current 8.6s 1.15s ease-in-out infinite alternate;
+}
+
+.home-intro-dialog .cosmic-dream-grain {
+  z-index: 4;
+  opacity: .026;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.48'/%3E%3C/svg%3E");
+}
+
+.home-intro-dialog .cosmic-dream-vignette {
+  z-index: 5;
+  box-shadow: inset 0 0 140px rgba(0, 0, 0, .36), inset 0 -120px 160px rgba(0, 0, 0, .34);
+}
+
+.home-intro-dialog .home-intro-blackout { z-index: 8; opacity: 0; background: #010207; }
+
+.home-intro-header {
+  position: absolute;
+  z-index: 12;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 104px;
+  padding: calc(22px + env(safe-area-inset-top)) clamp(28px, 5vw, 76px) 22px;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(1, 3, 10, .58), transparent);
+}
+
+.home-intro-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #f7f3ea;
+}
+
+.home-intro-brand .dream-mark {
+  flex: 0 0 auto;
+  filter: drop-shadow(0 0 16px rgba(232, 199, 126, .18));
+}
+
+.home-intro-brand > span { display: grid; gap: 5px; line-height: 1; }
+.home-intro-brand strong {
+  font-family: var(--font-editorial), AppleMyungjo, Batang, serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+}
+.home-intro-brand small { color: rgba(201, 220, 235, .52); font-size: 9px; font-weight: 650; letter-spacing: .12em; }
+
+.home-intro-skip {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 48px;
+  padding: 8px 2px 8px 16px;
+  color: rgba(247, 243, 234, .72);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.home-intro-skip i {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(201, 220, 235, .24);
+  border-radius: 50%;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.home-intro-skip i::before,
+.home-intro-skip i::after { position: absolute; top: 50%; content: ""; }
+.home-intro-skip i::before { right: 12px; left: 12px; height: 1px; background: currentColor; }
+.home-intro-skip i::after { right: 11px; width: 7px; height: 7px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; transform: translateY(-50%) rotate(45deg); }
+.home-intro-skip:hover { color: #fff; }
+.home-intro-skip:hover i { border-color: rgba(247, 243, 234, .62); transform: translateX(2px); }
+
+.home-intro-copy {
+  position: absolute;
+  z-index: 11;
+  bottom: clamp(48px, 6.2vh, 86px);
+  left: clamp(34px, 7.2vw, 116px);
+  width: min(650px, calc(100% - 68px));
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+
+.home-intro-kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 18px;
+  color: #e8c77e;
+  font-size: 10px;
+  font-weight: 720;
+  letter-spacing: .13em;
+}
+.home-intro-kicker span { width: 38px; height: 1px; background: currentColor; box-shadow: 0 0 14px rgba(231, 197, 104, .46); }
+
+.home-intro-copy h2 {
+  max-width: 9em;
+  margin: 0;
+  color: #fffdf7;
+  font-family: var(--font-editorial), AppleMyungjo, Batang, serif;
+  font-size: clamp(50px, 5vw, 74px);
+  font-weight: 630;
+  line-height: 1.25;
+  letter-spacing: -.062em;
+  text-wrap: balance;
+  text-shadow: 0 14px 58px rgba(0, 0, 0, .72);
+}
+.home-intro-copy h2 em { color: #f2ddb0; font-style: normal; text-shadow: 0 0 42px rgba(232, 199, 126, .11), 0 14px 58px rgba(0, 0, 0, .72); }
+.home-intro-copy > p:not(.home-intro-kicker) { margin: 20px 0 0; color: rgba(234, 239, 239, .67); font-size: 14px; line-height: 1.72; }
+
+.home-intro-enter {
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  align-items: center;
+  gap: 20px;
+  min-width: 322px;
+  min-height: 62px;
+  margin-top: 30px;
+  padding: 6px 10px 6px 24px;
+  color: #f7f3ea;
+  background: rgba(4, 6, 12, .66);
+  border: 1px solid rgba(247, 243, 234, .58);
+  border-radius: 2px;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, .34), inset 0 0 0 1px rgba(255, 255, 255, .025);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 760;
+  cursor: pointer;
+  transition: color .24s ease, background .24s ease, transform .24s ease;
+}
+.home-intro-enter > i { position: relative; width: 40px; height: 40px; color: inherit; }
+.home-intro-enter > i::before,
+.home-intro-enter > i::after { position: absolute; top: 50%; content: ""; }
+.home-intro-enter > i::before { right: 7px; left: 7px; height: 1px; background: currentColor; }
+.home-intro-enter > i::after { right: 6px; width: 8px; height: 8px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; transform: translateY(-50%) rotate(45deg); }
+.home-intro-enter:hover { color: #12151d; background: #f7f3ea; transform: translateY(-2px); }
+.home-intro-enter:active { transform: translateY(1px); }
+.home-intro-enter:focus-visible { outline: 1px solid rgba(232, 199, 126, .88); outline-offset: 3px; }
+
+.home-intro-dialog--open .home-intro-header { animation: yeoun-entry-reveal .72s .38s ease-out both; }
+.home-intro-dialog--open .home-intro-copy { animation: yeoun-entry-copy .88s .92s cubic-bezier(.2, .72, .2, 1) both; }
+.home-intro-dialog--open .home-intro-copy > p:not(.home-intro-kicker),
+.home-intro-dialog--open .home-intro-enter { animation: yeoun-detail-reveal .7s 1.34s ease-out both; }
+
+.home-intro-dialog--departing .home-intro-header,
+.home-intro-dialog--departing .home-intro-copy {
+  opacity: 0;
+  transform: translate3d(-10px, 0, 0);
+  transition: opacity .16s ease, transform .3s ease;
+}
+.home-intro-dialog--departing .cosmic-dream-panorama { opacity: 0; transform: scale(1.14); transition: opacity .7s ease .38s, transform 1.05s cubic-bezier(.2, .7, .2, 1); }
+.home-intro-dialog--departing .cosmic-dream-atmosphere { opacity: 0; transition: opacity .68s ease; }
+.home-intro-dialog--departing .home-intro-blackout { opacity: 1; transition: opacity .3s ease .98s; }
+.home-intro-dialog--skipping { opacity: 0; transition: opacity .18s ease; }
+
+@keyframes yeoun-cosmos-arrive {
+  0% { opacity: 0; transform: scale(1.03); }
+  18% { opacity: .08; }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes yeoun-panorama-arrive {
+  from { opacity: 0; transform: scale(1.045); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes yeoun-panorama-voyage {
+  0% { filter: saturate(.88) contrast(1.04) brightness(.75); transform: scale(1.05) translate3d(calc(-1.25% + var(--cosmos-pointer-x, 0px)), calc(.85% + var(--cosmos-pointer-y, 0px)), 0) rotate(-.18deg); }
+  42% { filter: saturate(.93) contrast(1.055) brightness(.81); transform: scale(1.095) translate3d(calc(.25% + var(--cosmos-pointer-x, 0px)), calc(-.35% + var(--cosmos-pointer-y, 0px)), 0) rotate(.08deg); }
+  72% { filter: saturate(.91) contrast(1.05) brightness(.78); transform: scale(1.125) translate3d(calc(1.05% + var(--cosmos-pointer-x, 0px)), calc(-.9% + var(--cosmos-pointer-y, 0px)), 0) rotate(.22deg); }
+  100% { filter: saturate(.9) contrast(1.045) brightness(.77); transform: scale(1.15) translate3d(calc(1.75% + var(--cosmos-pointer-x, 0px)), calc(-1.45% + var(--cosmos-pointer-y, 0px)), 0) rotate(.34deg); }
+}
+@keyframes yeoun-cosmos-breathe {
+  from { opacity: .44; transform: translate3d(-1.1%, .7%, 0) scale(1); }
+  to { opacity: .8; transform: translate3d(1.25%, -.9%, 0) scale(1.045); }
+}
+@keyframes yeoun-cosmic-current {
+  from { opacity: .62; transform: translate3d(-1.2%, .45%, 0) rotate(-.12deg); }
+  to { opacity: .78; transform: translate3d(1.35%, -.65%, 0) rotate(.18deg); }
+}
+@keyframes yeoun-entry-reveal {
+  from { opacity: 0; transform: translate3d(0, -7px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes yeoun-entry-copy {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes yeoun-detail-reveal {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (max-width: 760px) {
+  .home-intro-dialog { overflow: hidden; }
+  .home-intro-dialog .cosmic-dream-stage {
+    background:
+      radial-gradient(ellipse at 70% 21%, rgba(91, 145, 153, .14), transparent 45%),
+      radial-gradient(ellipse at 86% 54%, rgba(170, 92, 57, .07), transparent 40%),
+      linear-gradient(158deg, #01030a, #06101d 49%, #02050c);
+  }
+  .home-intro-dialog .cosmic-dream-atmosphere {
+    background:
+      linear-gradient(180deg, rgba(1, 3, 10, .14) 0%, rgba(1, 3, 10, .02) 34%, rgba(1, 3, 10, .48) 55%, rgba(1, 3, 10, .94) 76%),
+      linear-gradient(90deg, rgba(1, 3, 10, .24), transparent 61%, rgba(1, 3, 10, .08));
+  }
+  .home-intro-dialog .cosmic-dream-panorama { inset: -4.5%; }
+  .home-intro-dialog .cosmic-dream-panorama img {
+    object-position: center center;
+    filter: saturate(.88) contrast(1.05) brightness(.7);
+    transform-origin: 70% 27%;
+  }
+  .home-intro-dialog--open .cosmic-dream-panorama img { animation-duration: 9.2s; }
+  .home-intro-dialog .cosmic-dream-atmosphere::before {
+    background:
+      radial-gradient(ellipse at 72% 20%, rgba(232, 199, 126, .08), transparent 30%),
+      linear-gradient(151deg, transparent 26%, rgba(117, 199, 196, .026) 49%, transparent 72%);
+  }
+  .home-intro-dialog .cosmic-dream-vignette { box-shadow: inset 0 0 76px rgba(0, 0, 0, .48), inset 0 -96px 125px rgba(0, 0, 0, .42); }
+  .home-intro-dialog .cosmic-dream-grain { opacity: .035; }
+  .home-intro-header { min-height: 80px; padding: calc(9px + env(safe-area-inset-top)) 18px 9px; }
+  .home-intro-brand { gap: 8px; }
+  .home-intro-brand .dream-mark { width: 30px; height: 30px; }
+  .home-intro-brand strong { font-size: 19px; }
+  .home-intro-brand small { font-size: 8px; }
+  .home-intro-skip { gap: 7px; min-height: 44px; padding-left: 8px; font-size: 10px; }
+  .home-intro-skip i { width: 38px; height: 38px; }
+  .home-intro-copy { bottom: calc(42px + env(safe-area-inset-bottom)); left: 22px; width: calc(100% - 44px); }
+  .home-intro-kicker { margin-bottom: 12px; font-size: 8.5px; }
+  .home-intro-kicker span { width: 28px; }
+  .home-intro-copy h2 { max-width: 8.8em; font-size: clamp(39px, 10.8vw, 47px); line-height: 1.3; }
+  .home-intro-copy > p:not(.home-intro-kicker) { margin-top: 14px; font-size: 12px; }
+  .home-intro-enter { width: 100%; min-width: 0; min-height: 58px; margin-top: 21px; }
+}
+
+@media (min-width: 761px) and (max-height: 820px) {
+  .home-intro-copy { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .home-intro-copy h2 { font-size: clamp(44px, 4.5vw, 62px); line-height: 1.2; }
+  .home-intro-copy > p:not(.home-intro-kicker) { margin-top: 12px; }
+  .home-intro-enter { margin-top: 17px; }
+}
+
+@media (max-width: 760px) and (max-height: 720px) {
+  .home-intro-copy { bottom: calc(20px + env(safe-area-inset-bottom)); }
+  .home-intro-kicker { margin-bottom: 8px; }
+  .home-intro-copy h2 { font-size: 36px; }
+  .home-intro-copy > p:not(.home-intro-kicker) { margin-top: 9px; }
+  .home-intro-enter { margin-top: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro-dialog,
+  .home-intro-dialog *,
+  .home-intro-dialog *::before,
+  .home-intro-dialog *::after { animation: none !important; transition: none !important; }
+  .home-intro-dialog .cosmic-dream-canvas { opacity: 1; transform: none; }
+  .home-intro-dialog .cosmic-dream-panorama { opacity: 1; transform: none; }
+  .home-intro-dialog .cosmic-dream-panorama img { opacity: 1; filter: saturate(.88) contrast(1.05) brightness(.74); transform: none; }
+  .home-intro-dialog .cosmic-dream-atmosphere::before { opacity: .62; transform: none; }
+  .home-intro-header,
+  .home-intro-copy,
+  .home-intro-copy > p:not(.home-intro-kicker),
+  .home-intro-enter { opacity: 1; transform: none; }
+}

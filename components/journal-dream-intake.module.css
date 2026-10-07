@@ -1,0 +1,519 @@
+.main {
+  width: min(700px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(38px, 5vw, 58px) 0 70px;
+  color: var(--journal-ink);
+}
+
+.intro {
+  margin-bottom: 27px;
+}
+
+.intro h1 {
+  max-width: 690px;
+  margin: 0;
+  color: var(--journal-ink);
+  font-family: inherit;
+  font-size: clamp(34px, 3.7vw, 40px);
+  font-weight: 700;
+  line-height: 1.36;
+  letter-spacing: -0.05em;
+  word-break: keep-all;
+}
+
+.lead {
+  max-width: 600px;
+  margin: 14px 0 0;
+  color: var(--journal-ink-soft);
+  font-size: 15px;
+  line-height: 1.72;
+  letter-spacing: -0.025em;
+}
+
+.form {
+  margin: 0;
+}
+
+.taskSurface {
+  overflow: hidden;
+  background: var(--journal-raised);
+  border: 1px solid color-mix(in srgb, var(--journal-rule) 88%, transparent);
+  border-radius: 6px;
+}
+
+.composerHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 22px 0;
+}
+
+.composerHeading label {
+  color: var(--journal-ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.taskSurface textarea {
+  display: block;
+  width: 100%;
+  min-height: 224px;
+  padding: 19px 22px 15px;
+  resize: vertical;
+  color: var(--journal-ink);
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  font-size: 17px;
+  line-height: 1.82;
+  letter-spacing: -0.028em;
+}
+
+.taskSurface textarea::placeholder {
+  color: #8d8b83;
+}
+
+.taskSurface textarea:focus-visible {
+  outline: none;
+}
+
+.taskSurface:focus-within {
+  border-color: color-mix(in srgb, var(--journal-accent) 78%, var(--journal-rule));
+  box-shadow: 0 0 0 3px rgba(49, 92, 77, 0.1);
+}
+
+.composerMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 22px 16px;
+  color: var(--journal-quiet);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.composerMeta span:last-child {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+.testExamples {
+  margin: 0 22px 16px;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--journal-rule) 78%, transparent);
+}
+
+.testExamples p {
+  margin: 9px 0 0;
+  color: var(--journal-accent);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.testExampleList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.testExampleList button {
+  min-height: 32px;
+  padding: 5px 9px;
+  color: var(--journal-accent);
+  background: transparent;
+  border: 1px solid var(--journal-rule);
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.testExampleItem {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+}
+
+.testExampleItem a,
+.testExampleItem span {
+  color: var(--journal-quiet);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.testExampleItem a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.testExampleList button:hover {
+  background: color-mix(in srgb, var(--journal-accent) 6%, transparent);
+  border-color: color-mix(in srgb, var(--journal-accent) 42%, var(--journal-rule));
+}
+
+.testExampleList button:focus-visible {
+  outline: 2px solid var(--journal-accent);
+  outline-offset: 2px;
+}
+
+.helpers {
+  margin-top: 11px;
+  border-top: 1px solid color-mix(in srgb, var(--journal-rule) 78%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--journal-rule) 78%, transparent);
+}
+
+.helpers summary {
+  position: relative;
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 42px 11px 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.helpers summary::-webkit-details-marker {
+  display: none;
+}
+
+.helpers summary::after {
+  position: absolute;
+  top: 50%;
+  right: 7px;
+  width: 10px;
+  height: 10px;
+  content: "";
+  border-right: 1.5px solid var(--journal-accent);
+  border-bottom: 1.5px solid var(--journal-accent);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 200ms ease-out;
+}
+
+.helpers[open] summary::after {
+  transform: translateY(-30%) rotate(225deg);
+}
+
+.helpers summary > span:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.helpers summary strong {
+  color: var(--journal-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.helpers summary small {
+  color: var(--journal-quiet);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.helperBody {
+  padding: 22px 4px 24px;
+  border-top: 1px dashed color-mix(in srgb, var(--journal-rule) 78%, transparent);
+}
+
+.helperGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.helperGrid fieldset {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.helperGrid legend {
+  color: var(--journal-ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.helperGrid legend span {
+  margin-left: 6px;
+  color: var(--journal-quiet);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.helperHint {
+  margin: -3px 0 1px;
+  color: var(--journal-quiet);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.choiceList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.choice,
+.choiceSelected {
+  min-height: 38px;
+  padding: 7px 10px;
+  cursor: pointer;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1.35;
+  transition: color 180ms ease-out, background-color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.choice {
+  color: var(--journal-ink-soft);
+  background: transparent;
+  border: 1px solid var(--journal-rule);
+}
+
+.choice:hover {
+  color: var(--journal-accent);
+  border-color: color-mix(in srgb, var(--journal-accent) 48%, var(--journal-rule));
+}
+
+.choiceSelected {
+  color: #fff;
+  background: var(--journal-accent);
+  border: 1px solid var(--journal-accent);
+}
+
+.actionRow {
+  display: grid;
+  grid-template-columns: minmax(210px, 244px) 1fr;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 24px;
+  cursor: pointer;
+  color: #fff;
+  background: var(--journal-accent);
+  border: 1px solid var(--journal-accent);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: var(--journal-accent-dark);
+  border-color: var(--journal-accent-dark);
+  transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  color: #7d827c;
+  background: #e1e3e0;
+  border-color: #d4d7d3;
+}
+
+.actionRow p {
+  margin: 0;
+  color: var(--journal-ink);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.62;
+}
+
+.actionRow p span {
+  display: block;
+  color: var(--journal-quiet);
+  font-weight: 450;
+}
+
+.formError {
+  margin: 15px 0 -3px;
+  color: var(--journal-error);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.example {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid var(--journal-rule);
+  color: var(--journal-ink-soft);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.example summary {
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--journal-ink);
+  word-break: keep-all;
+}
+
+.example summary:focus-visible {
+  outline: 2px solid var(--journal-accent);
+  outline-offset: 3px;
+}
+
+.exampleScenes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 16px 0;
+}
+
+.exampleScenes h2 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.exampleScenes p,
+.exampleNote {
+  margin: 0;
+}
+
+.exampleNote {
+  color: var(--journal-quiet);
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .exampleScenes {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .main {
+    width: calc(100% - 32px);
+    padding: 28px 0 54px;
+  }
+
+  .intro {
+    margin-bottom: 24px;
+  }
+
+  .intro h1 {
+    font-size: clamp(29px, 8.2vw, 33px);
+    line-height: 1.38;
+  }
+
+  .lead {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.72;
+  }
+
+  .composerHeading {
+    align-items: flex-start;
+    padding: 17px 17px 0;
+  }
+
+  .taskSurface textarea {
+    min-height: 205px;
+    padding: 17px;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .composerMeta {
+    align-items: flex-end;
+    padding: 0 17px 14px;
+    font-size: 10px;
+  }
+
+  .testExamples {
+    margin-right: 17px;
+    margin-left: 17px;
+  }
+
+  .composerMeta span:first-child {
+    max-width: 210px;
+  }
+
+  .helpers summary {
+    min-height: 60px;
+    padding: 10px 38px 10px 2px;
+  }
+
+  .helpers summary::after {
+    right: 5px;
+  }
+
+  .helpers summary small {
+    max-width: 225px;
+  }
+
+  .helperBody {
+    padding: 20px 2px 22px;
+  }
+
+  .helperGrid {
+    gap: 21px;
+  }
+
+  .choice,
+  .choiceSelected {
+    min-height: 42px;
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .actionRow {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    margin-top: 16px;
+  }
+
+  .submitButton {
+    width: 100%;
+    min-height: 54px;
+  }
+
+  .actionRow p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 370px) {
+  .intro h1 {
+    font-size: 29px;
+  }
+
+  .composerMeta span:first-child {
+    max-width: 178px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .helpers summary::after,
+  .choice,
+  .choiceSelected,
+  .submitButton {
+    transition: none;
+  }
+
+  .submitButton:hover:not(:disabled) {
+    transform: none;
+  }
+}

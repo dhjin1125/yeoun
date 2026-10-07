@@ -1,0 +1,241 @@
+/* Basement-inspired one-shot assembly, translated into Yeoun's dream observatory. */
+
+.home-intro-dialog .dream-archive-stage,
+.home-intro-dialog .dream-observatory-poster,
+.home-intro-dialog .dream-observatory-canvas,
+.home-intro-dialog .dream-observatory-shade,
+.home-intro-dialog .dream-observatory-scanline,
+.home-intro-dialog .dream-observatory-grain,
+.home-intro-dialog .dream-observatory-vignette {
+  position: absolute;
+  inset: 0;
+}
+
+.home-intro-dialog .dream-archive-stage {
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 52% 33%, rgba(47, 88, 82, .2), transparent 45%),
+    linear-gradient(145deg, #010404, #03100f 54%, #010404);
+  contain: layout paint;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.home-intro-dialog .dream-observatory-poster {
+  z-index: 0;
+  overflow: hidden;
+  opacity: .82;
+  transform: scale(1.035);
+  transition: opacity 1.1s ease .12s, transform 1.8s cubic-bezier(.2, .72, .2, 1);
+}
+
+.home-intro-dialog .dream-observatory-poster::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(1, 5, 5, .57), rgba(1, 5, 5, .19) 45%, rgba(1, 5, 5, .13)),
+    linear-gradient(180deg, rgba(1, 5, 5, .12), transparent 45%, rgba(1, 5, 5, .58));
+}
+
+.home-intro-dialog .dream-observatory-poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 45%;
+  filter: saturate(.86) contrast(1.06) brightness(.86);
+  user-select: none;
+}
+
+.home-intro-dialog .dream-observatory-canvas {
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  outline: none;
+  transform: scale(1.015);
+  transform-origin: 50% 48%;
+  transition: opacity .8s ease, transform 1.3s cubic-bezier(.2, .72, .2, 1);
+}
+
+.home-intro-dialog .dream-archive-stage[data-renderer="webgl"] .dream-observatory-canvas {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.home-intro-dialog .dream-archive-stage[data-renderer="webgl"][data-textures="ready"] .dream-observatory-poster {
+  opacity: 0;
+  transform: scale(1);
+}
+
+.home-intro-dialog .dream-observatory-shade {
+  z-index: 2;
+  background:
+    linear-gradient(90deg, rgba(1, 5, 5, .69) 0%, rgba(1, 5, 5, .35) 26%, rgba(1, 5, 5, .04) 56%, rgba(1, 5, 5, .1) 100%),
+    linear-gradient(180deg, rgba(1, 5, 5, .18) 0%, transparent 34%, transparent 58%, rgba(1, 5, 5, .76) 100%);
+}
+
+.home-intro-dialog .dream-observatory-scanline {
+  z-index: 3;
+  top: 14%;
+  bottom: auto;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent 6%, rgba(176, 215, 203, .08) 22%, rgba(199, 229, 219, .45) 50%, rgba(176, 215, 203, .08) 78%, transparent 94%);
+  box-shadow: 0 0 18px rgba(141, 200, 183, .12);
+}
+
+.home-intro-dialog--open .dream-archive-stage[data-motion="active"] .dream-observatory-scanline {
+  animation: yeoun-observation-line 5.8s .24s cubic-bezier(.25, .72, .22, 1) both;
+}
+
+.home-intro-dialog .dream-observatory-grain {
+  z-index: 4;
+  opacity: .032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.77' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.52'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.home-intro-dialog .dream-observatory-vignette {
+  z-index: 5;
+  box-shadow:
+    inset 0 0 130px rgba(0, 0, 0, .34),
+    inset 0 -150px 180px rgba(0, 0, 0, .25),
+    inset 0 70px 100px rgba(0, 0, 0, .1);
+  pointer-events: none;
+}
+
+.home-intro-dialog .home-intro-header {
+  min-height: 86px;
+  padding: calc(18px + env(safe-area-inset-top)) clamp(24px, 3.5vw, 54px) 16px;
+  background: linear-gradient(180deg, rgba(1, 5, 5, .68), transparent);
+  backface-visibility: hidden;
+  isolation: isolate;
+  will-change: opacity, transform;
+}
+
+.home-intro-dialog .home-intro-copy {
+  bottom: clamp(38px, 5.2vh, 72px);
+  left: clamp(28px, 5vw, 76px);
+  width: min(610px, calc(100% - 56px));
+  backface-visibility: hidden;
+  isolation: isolate;
+  will-change: opacity, transform;
+}
+
+.home-intro-dialog .home-intro-copy::before {
+  position: absolute;
+  z-index: -1;
+  inset: -54px -110px -42px -48px;
+  content: "";
+  background: radial-gradient(ellipse at 19% 62%, rgba(1, 5, 5, .93), rgba(1, 5, 5, .56) 44%, transparent 73%);
+  pointer-events: none;
+}
+
+.home-intro-dialog .home-intro-copy h2 {
+  max-width: 9.5em;
+  font-size: clamp(48px, 4.7vw, 70px);
+  line-height: 1.22;
+  letter-spacing: -.058em;
+  text-shadow: 0 10px 50px rgba(0, 0, 0, .8);
+}
+
+.home-intro-dialog .home-intro-copy h2 em {
+  color: #e9d4a6;
+  text-shadow: 0 0 34px rgba(211, 190, 139, .11), 0 10px 50px rgba(0, 0, 0, .8);
+}
+
+.home-intro-dialog .home-intro-copy > p:not(.home-intro-kicker) {
+  margin-top: 14px;
+  color: rgba(235, 240, 236, .68);
+  font-size: 13px;
+}
+
+.home-intro-dialog .home-intro-enter {
+  min-height: 58px;
+  margin-top: 22px;
+  background: rgba(1, 7, 7, .78);
+  border-color: rgba(245, 241, 231, .62);
+  box-shadow: none;
+}
+
+.home-intro-dialog--departing .dream-observatory-canvas,
+.home-intro-dialog--departing .dream-observatory-poster {
+  opacity: 0;
+  transform: scale(1.055);
+  transition: opacity .72s ease .18s, transform 1.05s cubic-bezier(.2, .72, .2, 1);
+}
+
+.home-intro-dialog--departing .dream-observatory-shade,
+.home-intro-dialog--departing .dream-observatory-scanline {
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+@keyframes yeoun-observation-line {
+  0% { top: 14%; opacity: 0; }
+  12% { opacity: .48; }
+  76% { opacity: .22; }
+  100% { top: 83%; opacity: 0; }
+}
+
+@media (max-width: 760px) {
+  .home-intro-dialog .dream-observatory-poster img {
+    object-position: 56% 25%;
+    filter: saturate(.86) contrast(1.05) brightness(.8);
+  }
+
+  .home-intro-dialog .dream-observatory-shade {
+    background:
+      linear-gradient(180deg, rgba(1, 5, 5, .1) 0%, transparent 33%, rgba(1, 5, 5, .38) 54%, rgba(1, 5, 5, .95) 79%, #010505 100%),
+      linear-gradient(90deg, rgba(1, 5, 5, .18), transparent 76%);
+  }
+
+  .home-intro-dialog .dream-observatory-vignette {
+    box-shadow: inset 0 0 72px rgba(0, 0, 0, .34), inset 0 -112px 145px rgba(0, 0, 0, .38);
+  }
+
+  .home-intro-dialog .home-intro-header {
+    padding: calc(10px + env(safe-area-inset-top)) 18px 9px;
+  }
+
+  .home-intro-dialog .home-intro-copy {
+    bottom: calc(28px + env(safe-area-inset-bottom));
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+
+  .home-intro-dialog .home-intro-copy::before {
+    inset: -72px -28px -30px;
+    background: linear-gradient(180deg, transparent, rgba(1, 5, 5, .95) 34%);
+  }
+
+  .home-intro-dialog .home-intro-copy h2 {
+    max-width: 8.6em;
+    font-size: clamp(36px, 10.3vw, 44px);
+    line-height: 1.25;
+  }
+
+  .home-intro-dialog .home-intro-copy > p:not(.home-intro-kicker) {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .home-intro-dialog .home-intro-enter {
+    min-height: 56px;
+    margin-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-intro-dialog .dream-observatory-canvas { display: none; }
+  .home-intro-dialog .dream-observatory-poster { opacity: 1; transform: none; }
+  .home-intro-dialog .dream-observatory-poster img {
+    filter: saturate(.88) contrast(1.05) brightness(.85);
+    transform: none;
+  }
+  .home-intro-dialog .dream-observatory-scanline { display: none; }
+}

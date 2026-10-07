@@ -1,0 +1,274 @@
+.page {
+  min-height: calc(100svh - 82px);
+  color: var(--journal-ink);
+  background: var(--journal-page);
+}
+
+.homeLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--journal-ink-soft);
+  font-size: 12px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: color 180ms ease-out;
+}
+
+.homeLink:hover {
+  color: var(--journal-accent-dark);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+  gap: clamp(56px, 7vw, 88px);
+  width: min(960px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 96px) 0 112px;
+  align-items: start;
+}
+
+.intro {
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.eyebrow {
+  margin: 0 0 22px;
+  color: var(--journal-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: clamp(42px, 5.2vw, 56px);
+  font-weight: 720;
+  line-height: 1.22;
+  letter-spacing: -0.06em;
+  word-break: keep-all;
+}
+
+.description {
+  max-width: 37ch;
+  margin: 25px 0 0;
+  color: var(--journal-ink-soft);
+  font-size: 15px;
+  line-height: 1.82;
+  letter-spacing: -0.025em;
+}
+
+.assurances {
+  max-width: 440px;
+  margin: 49px 0 0;
+  border-top: 1px solid var(--journal-rule);
+}
+
+.assurances > div {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--journal-rule);
+}
+
+.assurances dt,
+.assurances dd {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.assurances dt {
+  color: var(--journal-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.assurances dd {
+  color: var(--journal-ink-soft);
+}
+
+.formPanel {
+  min-width: 0;
+  padding: 30px 30px 32px;
+  background: var(--journal-raised);
+  border: 1px solid var(--journal-rule);
+  border-radius: 8px;
+}
+
+.formHeading {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--journal-rule);
+}
+
+.formHeading p {
+  margin: 0;
+  color: var(--journal-ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.formHeading span {
+  display: block;
+  margin-top: 7px;
+  color: var(--journal-quiet);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  color: var(--journal-ink);
+  font-size: 11px;
+  font-weight: 680;
+}
+
+.field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 13px;
+  color: var(--journal-ink);
+  background: var(--journal-raised);
+  border: 1px solid #c6cbc5;
+  border-radius: 6px;
+  outline: 0;
+  font-size: 16px;
+  transition: border-color 160ms ease-out, outline-color 160ms ease-out;
+}
+
+.field input::placeholder {
+  color: #969b95;
+}
+
+.field input:focus-visible {
+  border-color: var(--journal-accent);
+  outline: 3px solid rgba(49, 92, 77, 0.18);
+  outline-offset: 1px;
+}
+
+.error {
+  margin: -3px 0 0;
+  color: var(--journal-error);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.submit {
+  display: inline-flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 2px;
+  padding: 0 20px;
+  color: #fff;
+  background: var(--journal-accent);
+  border: 1px solid var(--journal-accent);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--journal-accent-dark);
+  border-color: var(--journal-accent-dark);
+  transform: translateY(-1px);
+}
+
+.submit:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submit:disabled {
+  color: #7d827c;
+  background: #e1e3e0;
+  border-color: #d4d7d3;
+  cursor: not-allowed;
+}
+
+.securityNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: -2px 0 0;
+  color: var(--journal-quiet);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.securityNote svg {
+  flex: 0 0 auto;
+  color: var(--journal-accent);
+}
+
+@media (max-width: 760px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    width: calc(100% - 32px);
+    padding: 46px 0 72px;
+  }
+
+  .intro {
+    padding-top: 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 17px;
+  }
+
+  .intro h1 {
+    font-size: clamp(36px, 10.4vw, 42px);
+    line-height: 1.24;
+  }
+
+  .description {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .assurances {
+    margin-top: 32px;
+  }
+
+  .formPanel {
+    padding: 24px 18px 26px;
+  }
+
+  .formHeading {
+    padding-bottom: 20px;
+  }
+
+  .form {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeLink,
+  .field input,
+  .submit {
+    transition: none;
+  }
+
+  .submit:hover:not(:disabled),
+  .submit:active:not(:disabled) {
+    transform: none;
+  }
+}

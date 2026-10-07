@@ -10,6 +10,21 @@ function fixture() {
   return { states, mutate, repo: { mutateConversationGuard: mutate } as unknown as DreamRepository };
 }
 describe("origin request budget", () => {
+  it("keeps bounded analytics traffic separate from generation and authentication", async () => {
+    const { repo } = fixture();
+    for (let i = 0; i < 10; i++) expect(await guardOriginRequest(req(undefined, "/api/events"), repo)).toBeNull();
+    expect((await guardOriginRequest(req(undefined, "/api/events"), repo))?.status).toBe(429);
+    expect(await guardOriginRequest(req(), repo)).toBeNull();
+    expect(await guardOriginRequest(req(undefined, "/api/auth/login"), repo)).toBeNull();
+    for (let i = 0; i < 8; i++) expect(await guardOriginRequest(req(), repo)).toBeNull();
+    expect((await guardOriginRequest(req(), repo))?.status).toBe(429);
+  });
+  it("does not treat other paths under events as analytics exemptions", async () => {
+    const { repo } = fixture();
+    for (let i = 0; i < 10; i++) expect(await guardOriginRequest(req(undefined, "/api/events/other"), repo)).toBeNull();
+    expect((await guardOriginRequest(req(), repo))?.status).toBe(429);
+    expect(await guardOriginRequest(req(undefined, "/api/events"), repo)).toBeNull();
+  });
   it("limits cookie churn and spoofed forwarding headers before work; permits another peer", async () => {
     const { repo, states } = fixture();
     for (let i = 0; i < 10; i++) expect(await guardOriginRequest(req(undefined, undefined, undefined, { cookie: `session=${i}`, "x-forwarded-for": `192.0.2.${i}` }), repo)).toBeNull();

@@ -12,13 +12,16 @@ export async function guardOriginRequest(request: Request, repository?: DreamRep
       (path === "/api/payments/portone/webhook" && request.method === "POST")) return null;
   const raw = request.headers.get("x-yeoun-peer-ip") ?? "";
   const peer = isIP(raw) ? raw : "unknown-peer";
+  // Analytics must not spend the generation/login budget. Keep analytics bounded
+  // as well, using the same server-owned limiter in a separate namespace.
+  const budgetKey = path === "/api/events" ? `origin:events:${hashToken(peer)}` : `origin:${hashToken(peer)}`;
   const reject = (status: number, code: string, retry: number) => NextResponse.json(
     { error: { code, message: "요청이 많거나 확인할 수 없어요. 잠시 후 다시 시도해 주세요." } },
     { status, headers: { "Retry-After": String(retry), "Cache-Control": "private, no-store" } }
   );
   try {
     const result = await (repository ?? getRepository()).mutateConversationGuard(
-      `origin:${hashToken(peer)}`, { kind: "admit", scope: "principal", lease: opaqueToken(9) },
+      budgetKey, { kind: "admit", scope: "principal", lease: opaqueToken(9) },
       Date.now() + 3_600_000
     );
     if (result.status !== "allowed") return reject(429, "ORIGIN_REQUEST_RATE_LIMITED", result.retryAfterSeconds || 1);

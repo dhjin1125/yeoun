@@ -28,3 +28,13 @@ npm run dev
 - 회사 홈페이지: [nodeoff.kr](https://nodeoff.kr)
 
 현재 개발 상태와 공개 주소는 회사 홈페이지와 함께 관리합니다.
+
+## 공개 이력과 개발 경과
+
+2026년 10월 7일 기존 비공개 작업을 정리해 처음 공개한 저장소입니다. 개발 시작일과 공개 커밋 날짜는 다릅니다. [개발 경과와 공개 범위](docs/development-history.md)를 확인해 주세요.
+
+## Screenshot
+
+![Public service screen](docs/screenshots/yeoun-home.png)
+
+Captured from the actual public website on 2026-10-07. This is a point-in-time view; sample UI illustrations on the company homepage are labeled as illustrations.
